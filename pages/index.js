@@ -1,7 +1,14 @@
+import Layout from "../components/Layout";
+import EmojiSearch from "../components/EmojiSearch";
+import EmojiList from "../components/EmojiList";
+
 const Index = () => (
-  <div>
-    <h1>Hello Next.js</h1>
-  </div>
+  <Layout>
+    <div>
+      <EmojiSearch />
+      <EmojiList />
+    </div>
+  </Layout>
 );
 
 export default Index;
