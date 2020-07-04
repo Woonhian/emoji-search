@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Paginate from "./Paginate";
 import EmojiSearch from "./EmojiSearch";
+import copy from "clipboard-copy";
+import Notifications, { notify } from "react-notify-toast";
 
 const EmojiList = () => {
   const [emojis, setEmojis] = useState([]);
@@ -39,6 +41,21 @@ const EmojiList = () => {
     return filteredEmojis.slice(indexOfFirstEmoji, indexOfLastEmoji);
   };
 
+  const updateNumberEmojis = () => {
+    const numberEmojis = emojis.filter((el) => {
+      return el.unicodeName.toLowerCase().includes(searchTerm);
+    });
+    return numberEmojis;
+  };
+
+  const handleEmojiCopy = (el) => {
+    copy(el);
+    notify.show("Copied " + el, "custom", 1000, {
+      background: "rgba(0, 0, 0, 0.5)",
+      text: "#fff",
+    });
+  };
+
   if (isLoading) {
     return (
       <div className="text-center">
@@ -51,12 +68,13 @@ const EmojiList = () => {
 
   return (
     <div>
+      <Notifications />
       <EmojiSearch setSearchTerm={setSearchTerm} />
       <Paginate
         pageSelected={pageSelected}
         currentPage={currentPage}
         emojisPerPage={emojisPerPage}
-        totalEmojis={emojis.length}
+        totalEmojis={updateNumberEmojis().length}
       />
       <table className="table table-hover">
         <thead>
@@ -68,7 +86,7 @@ const EmojiList = () => {
         <tbody>
           {updateSearchEmojis().map((el, key) => {
             return (
-              <tr key={key}>
+              <tr key={key} onClick={() => handleEmojiCopy(el.character)}>
                 <td>{el.character}</td>
                 <td>{el.unicodeName}</td>
               </tr>
