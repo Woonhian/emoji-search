@@ -5,7 +5,6 @@ import EmojiList from "../components/EmojiList";
 const Index = () => (
   <Layout>
     <div>
-      <EmojiSearch />
       <EmojiList />
     </div>
   </Layout>
