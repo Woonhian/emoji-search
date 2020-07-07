@@ -36,7 +36,10 @@ const EmojiList = () => {
 
   const updateSearchEmojis = () => {
     const filteredEmojis = emojis.filter((el) => {
-      return el.unicodeName.toLowerCase().includes(searchTerm);
+      return (
+        el.unicodeName.toLowerCase().includes(searchTerm) ||
+        el.character.includes(searchTerm)
+      );
     });
     return filteredEmojis.slice(indexOfFirstEmoji, indexOfLastEmoji);
   };
