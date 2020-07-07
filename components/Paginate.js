@@ -17,6 +17,9 @@ const Paginate = (props) => {
           if (number === props.currentPage) {
             classes += "active";
           }
+          if (pageNumbers.length === 1) {
+            props.pageSelected(1);
+          }
           return (
             <li className={classes} key={key}>
               <a
