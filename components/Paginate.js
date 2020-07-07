@@ -17,7 +17,7 @@ const Paginate = (props) => {
           if (number === props.currentPage) {
             classes += "active";
           }
-          if (pageNumbers.length === 1) {
+          if (pageNumbers.length < props.currentPage) {
             props.pageSelected(1);
           }
           return (
